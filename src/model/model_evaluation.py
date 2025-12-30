@@ -128,7 +128,7 @@ def main():
             mlflow.sklearn.log_model(model,"model")
             #Get the model path
             artifact_path = mlflow.get_artifact_uri("model")
-            print("Logged Model Artifact Path:", artifact_path)
+            print("Artifact Path:", artifact_path)
             mlflow.log_artifact('evaluation/metrics.yaml')
             mlflow.log_artifact("data/external/tweet_emotions.csv")
             run_id=run.info.run_id

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Emotion Detection</h1>
+        <textarea id="text-input" placeholder="Enter text here..."></textarea>
+        <button id="predict-btn">Predict Emotion</button>
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        const btn = document.getElementById("predict-btn");
+        const result = document.getElementById("result");
+
+        btn.addEventListener("click", async () => {
+            const text = document.getElementById("text-input").value;
+            if (!text) {
+                result.innerText = "Please enter some text!";
+                return;
+            }
+
+            const response = await fetch("/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text })
+            });
+
+            const data = await response.json();
+            if (data.prediction) {
+                result.innerText = "Predicted Emotion: " + data.prediction[0];
+            } else {
+                result.innerText = "Error: " + data.error;
+            }
+        });
+    </script>
+</body>
+</html>

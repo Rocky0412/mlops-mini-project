@@ -4,6 +4,7 @@ import os
 import logging
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
+import pickle
 
 
 # -----------------------------
@@ -54,6 +55,9 @@ def feature_engineering(path: str):
 
         logging.info("Transforming test data...")
         X_test = vectorizer.transform(test_df["content"].fillna("").values)
+
+        with open("./model/vectorizer.pkl", "wb") as f:
+            pickle.dump(vectorizer, f)
 
         # Convert to DataFrame
         X_train = pd.DataFrame(X_train.toarray())
