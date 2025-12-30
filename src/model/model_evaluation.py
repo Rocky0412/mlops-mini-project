@@ -11,10 +11,11 @@ from sklearn.metrics import (
 )
 import dagshub # type: ignore
 import mlflow # type: ignore
+import yaml
 
 
 dagshub.init(repo_owner='Rocky0412', repo_name='mlops-mini-project', mlflow=True)
-mlflow.set_tracking_uri('https://dagshub.com/Rocky0412/mlops-mini-project.mlflow')
+
 
 # -----------------------------
 # LOGGING SETUP
@@ -107,8 +108,10 @@ def save_metrics(metrics, path="./evaluation/metrics.yaml"):
 
 def main():
     try:
+        
+        mlflow.set_tracking_uri('https://dagshub.com/Rocky0412/mlops-mini-project.mlflow')
         mlflow.set_experiment('DVC-Pipeline-Emotion Detection')
-        with mlflow.start_run():
+        with mlflow.start_run() as run:
             model = load_model()
             test_df = load_test_data()
 
@@ -123,8 +126,18 @@ def main():
             params={k:v for k,v in params.items()}
             mlflow.log_params(params)
             mlflow.sklearn.log_model(model,"model")
+            #Get the model path
+            artifact_path = mlflow.get_artifact_uri("model")
+            print("Logged Model Artifact Path:", artifact_path)
             mlflow.log_artifact('evaluation/metrics.yaml')
             mlflow.log_artifact("data/external/tweet_emotions.csv")
+            run_id=run.info.run_id
+            model_details= {
+                'run_id':run_id,
+                'path':artifact_path
+            }
+            with open('./reports/run.yaml','w') as f:
+                yaml.dump(model_details,f,indent=4)
 
 
     except Exception as e:

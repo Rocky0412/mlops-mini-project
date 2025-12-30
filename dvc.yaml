@@ -35,3 +35,8 @@ stages:
     metrics:
     - evaluation/metrics.yaml:
         cache: false
+  model_register:
+    cmd: python3 src/model/register_model.py
+    deps:
+    - reports/run.yaml
+    - src/model/register_model.py

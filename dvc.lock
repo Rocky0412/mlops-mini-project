@@ -77,10 +77,21 @@ stages:
       nfiles: 1
     - path: src/model/model_evaluation.py
       hash: md5
-      md5: 689033a01215fd18e01651b2edb5d1c9
-      size: 4087
+      md5: 77522eb8b931ad1bcbb4ffd13dbe4447
+      size: 4535
     outs:
     - path: evaluation/metrics.yaml
       hash: md5
       md5: 65219e8270ae0e39262fc1ea1ca1dcf2
       size: 120
+  model_register:
+    cmd: python3 src/model/register_model.py
+    deps:
+    - path: reports/run.yaml
+      hash: md5
+      md5: 1a2a2106551178507d974e708343e0c1
+      size: 147
+    - path: src/model/register_model.py
+      hash: md5
+      md5: da2e3976d0769afc7d8a726a87b8be79
+      size: 628
