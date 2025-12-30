@@ -66,7 +66,7 @@ def load_data(url: str) -> None:
         # --------------------------
         
         train_data, test_data = train_test_split(
-            df, test_size=0.3, random_state=42
+            df, test_size=0.2, random_state=42
         )
         logging.info(f"Split data: train={len(train_data)}, test={len(test_data)}")
 
