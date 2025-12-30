@@ -1,0 +1,5 @@
+outs:
+- md5: 8798f5966f545f1e06bae798fe0c8e65
+  size: 3768185
+  hash: md5
+  path: tweet_emotions.csv
