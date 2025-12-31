@@ -109,7 +109,7 @@ def load_data(url: str) -> None:
 
 
 if __name__ == "__main__":
-    DATA_URL = "data/external/tweet_emotions.csv"
+    DATA_URL ="data/external/tweet_emotions.csv"
     #DATA_URL = "https://raw.githubusercontent.com/campusx-official/jupyter-masterclass/main/tweet_emotions.csv"
 
     load_data(DATA_URL)
