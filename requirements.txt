@@ -14,7 +14,6 @@ appdirs==1.4.4
 asyncssh==2.22.0
 atpublic==7.0.0
 attrs==25.4.0
-awscli==1.44.8
 backoff==2.2.1
 billiard==4.2.4
 blinker==1.9.0
